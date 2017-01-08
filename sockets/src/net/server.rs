@@ -1,7 +1,7 @@
 use std::net::{TcpListener, TcpStream};
-use std::io::{BufReader, BufWriter};
+use std::io::BufReader;
 use std::thread;
-use std::io::{Read, Write};
+use std::io::Read;
 
 fn read_messages(stream: &TcpStream) {
     let buf_socket_reader = BufReader::new(stream);
@@ -10,20 +10,12 @@ fn read_messages(stream: &TcpStream) {
         match byte {
             Ok(b) => {
                 bytes.push(b); 
-                send_ack(stream);
             }
             Err(e) => panic!("Byte was not correctly received. Ignoring it. Error: {:?}", e.to_string())
         }
     } 
     println!("server -> {:?}", String::from_utf8(bytes).unwrap());
 }
-
-fn send_ack(stream: &TcpStream) {
-/*    let mut buf_socket_writer = BufWriter::new(stream);
-    buf_socket_writer.write(b"server: ack\n").unwrap();
-    buf_socket_writer.flush().unwrap();
-    */
-} 
 
 pub fn listen_for_connections() {
     let listener = match TcpListener::bind("127.0.0.1:40002") {
