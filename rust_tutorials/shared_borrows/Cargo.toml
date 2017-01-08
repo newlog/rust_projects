@@ -1,0 +1,6 @@
+[package]
+name = "shared_borrows"
+version = "0.1.0"
+authors = ["Albert <albert.lopez@attackiq.com>"]
+
+[dependencies]
