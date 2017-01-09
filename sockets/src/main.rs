@@ -20,7 +20,7 @@ fn start_server() {
 }
 
 fn start_client() -> net::client::TCPClient {
-    match TCPClient::new("127.0.0.1", "40002") {
+    match TCPClient::connect("127.0.0.1", "40002") {
         Ok(client) => client,
         Err(e) => panic!("client -> Error connecting to server. Error: {}", e.to_string())
     }

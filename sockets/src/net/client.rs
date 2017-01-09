@@ -9,8 +9,8 @@ pub struct TCPClient {
 
 impl TCPClient {
 
-    pub fn new(host: &str, port: &str) -> Result<TCPClient, Error> {
-        match TCPClient::connect(host, port) {
+    pub fn connect(host: &str, port: &str) -> Result<TCPClient, Error> {
+        match TCPClient::_connect(host, port) {
             Ok(tcp_stream) => {
                 Ok(
                     TCPClient {tcp_stream: tcp_stream}
@@ -29,7 +29,7 @@ impl TCPClient {
         }
     }
 
-    fn connect(host: &str, port: &str) -> Result<TcpStream, Error> {
+    fn _connect(host: &str, port: &str) -> Result<TcpStream, Error> {
         let uri = format!("{}:{}", host, port);
         match TcpStream::connect(uri.as_str()) {
             Ok(tcp_stream) => Ok(tcp_stream),
